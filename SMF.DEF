@@ -1,0 +1,6 @@
+NAME           logfont  WINDOWAPI
+DESCRIPTION   'Base code for PM applications'
+PROTMODE
+HEAPSIZE       1024
+STACKSIZE      8194
+EXPORTS

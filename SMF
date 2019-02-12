@@ -1,0 +1,22 @@
+# base make file
+
+cp=cl -c -G2s -AL -W3 -Zi -B1 c1l.exe
+
+smf.obj: smf smf.c smf.h
+    $(cp) smf.c
+
+metwnd.obj : metwnd.c smf.h
+    $(cp) metwnd.c
+
+allwnd.obj : allwnd.c smf.h
+    $(cp) allwnd.c
+
+fatwnd.obj : fatwnd.c smf.h
+    $(cp) fatwnd.c
+
+smf.res : smf.h smf.rc
+    rc -r smf.rc
+
+smf.exe : metwnd.obj allwnd.obj fatwnd.obj smf.obj smf.res
+    link smf metwnd allwnd fatwnd, /CO /align:16, NUL, os2, smf
+    rc smf.res

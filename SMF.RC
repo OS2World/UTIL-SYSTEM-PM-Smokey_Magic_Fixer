@@ -1,0 +1,119 @@
+#include <os2.h>
+#include "smf.h"
+
+ICON 1 eff.ico
+
+DLGTEMPLATE 256 LOADONCALL MOVEABLE DISCARDABLE 
+BEGIN
+    DIALOG "", 256, 160, 0, 130, 115, FS_NOBYTEALIGN | FS_DLGBORDER |
+                WS_VISIBLE | WS_CLIPSIBLINGS | WS_SAVEBITS
+    BEGIN
+        CONTROL "FATTRS", 256, 50, 102, 34, 8, WC_STATIC, SS_TEXT | DT_CENTER |
+                DT_TOP | WS_GROUP | WS_VISIBLE
+        CONTROL "usRecordLength", 257, 3, 95, 75, 8, WC_STATIC, SS_TEXT |
+                DT_RIGHT | DT_TOP | WS_GROUP | WS_VISIBLE
+        CONTROL "fsSelection", 258, 3, 85, 75, 8, WC_STATIC, SS_TEXT |
+                DT_RIGHT | DT_TOP | WS_GROUP | WS_VISIBLE
+        CONTROL "lMatch", 259, 3, 75, 75, 8, WC_STATIC, SS_TEXT | DT_RIGHT |
+                DT_TOP | WS_GROUP | WS_VISIBLE
+        CONTROL "szFaceName", 260, 3, 65, 60, 8, WC_STATIC, SS_TEXT |
+                DT_LEFT | DT_TOP | WS_GROUP | WS_VISIBLE
+        CONTROL "idRegistry", 261, 3, 55, 75, 8, WC_STATIC, SS_TEXT |
+                DT_RIGHT | DT_TOP | WS_GROUP | WS_VISIBLE
+        CONTROL "usCodePage", 262, 3, 45, 75, 8, WC_STATIC, SS_TEXT |
+                DT_RIGHT | DT_TOP | WS_GROUP | WS_VISIBLE
+        CONTROL "lMaxBaselineExt", 263, 3, 35, 75, 8, WC_STATIC, SS_TEXT |
+                DT_RIGHT | DT_TOP | WS_GROUP | WS_VISIBLE
+        CONTROL "lAveCharWidth", 264, 3, 25, 75, 8, WC_STATIC, SS_TEXT |
+                DT_RIGHT | DT_TOP | WS_GROUP | WS_VISIBLE
+        CONTROL "fsType", 265, 3, 15, 75, 8, WC_STATIC, SS_TEXT | DT_RIGHT |
+                DT_TOP | WS_GROUP | WS_VISIBLE
+        CONTROL "fsFontUse", 266, 3, 5, 75, 8, WC_STATIC, SS_TEXT | DT_RIGHT |
+                DT_TOP | WS_GROUP | WS_VISIBLE
+
+        CONTROL "56", F_usRecordLength, 87, 97, 35, 6, WC_ENTRYFIELD,
+                WS_VISIBLE | ES_READONLY
+
+        CONTROL "0", F_fsSelection, 87, 87, 35, 5, WC_ENTRYFIELD, ES_MARGIN |
+                WS_TABSTOP | WS_VISIBLE
+        CONTROL "0", F_lMatch, 87, 77, 35, 5, WC_ENTRYFIELD, ES_MARGIN |
+                WS_TABSTOP | WS_VISIBLE
+        CONTROL "0", F_szFacename, 62, 67, 60, 5, WC_ENTRYFIELD, ES_MARGIN |
+                WS_TABSTOP | WS_VISIBLE
+        CONTROL "0", F_idRegistry, 87, 57, 35, 5, WC_ENTRYFIELD, ES_MARGIN |
+                WS_TABSTOP | WS_VISIBLE
+        CONTROL "0", F_usCodePage, 87, 47, 35, 5, WC_ENTRYFIELD, ES_MARGIN |
+                WS_TABSTOP | WS_VISIBLE
+        CONTROL "0", F_lMaxBaselineExt, 87, 37, 35, 5, WC_ENTRYFIELD, ES_MARGIN |
+                WS_TABSTOP | WS_VISIBLE
+        CONTROL "0", F_lAveCharWidth, 87, 27, 35, 5, WC_ENTRYFIELD, ES_MARGIN |
+                WS_TABSTOP | WS_VISIBLE
+        CONTROL "0", F_fsType, 87, 17, 35, 5, WC_ENTRYFIELD, ES_MARGIN |
+                WS_TABSTOP | WS_VISIBLE
+        CONTROL "0", F_fsFontUse, 87, 7, 35, 5, WC_ENTRYFIELD, ES_MARGIN |
+                WS_TABSTOP | WS_VISIBLE
+    END
+END
+
+
+/* the char bundle window */
+DLGTEMPLATE 257 LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG "", 257, 140, 165, 130, 115, FS_NOBYTEALIGN | FS_DLGBORDER |
+                WS_VISIBLE | WS_CLIPSIBLINGS | WS_SAVEBITS
+    BEGIN
+        CONTROL "CHARBUNDLE", 256, 35, 105, 64, 8, WC_STATIC, SS_TEXT | DT_CENTER |
+                DT_TOP | WS_GROUP | WS_VISIBLE
+        CONTROL "lColor", 257, 3, 95, 75, 8, WC_STATIC, SS_TEXT |
+                DT_RIGHT | DT_TOP | WS_GROUP | WS_VISIBLE
+        CONTROL "lBackColor", 258, 3, 85, 75, 8, WC_STATIC, SS_TEXT |
+                DT_RIGHT | DT_TOP | WS_GROUP | WS_VISIBLE
+        CONTROL "usMixMode", 259, 3, 75, 75, 8, WC_STATIC, SS_TEXT | DT_RIGHT |
+                DT_TOP | WS_GROUP | WS_VISIBLE
+        CONTROL "usBackMixMode", 260, 3, 65, 75, 8, WC_STATIC, SS_TEXT |
+                DT_RIGHT | DT_TOP | WS_GROUP | WS_VISIBLE
+        CONTROL "usSet", 261, 3, 55, 75, 8, WC_STATIC, SS_TEXT |
+                DT_RIGHT | DT_TOP | WS_GROUP | WS_VISIBLE
+        CONTROL "usPrecision", 262, 3, 45, 75, 8, WC_STATIC, SS_TEXT |
+                DT_RIGHT | DT_TOP | WS_GROUP | WS_VISIBLE
+        CONTROL "sizfxCell", 263, 3, 35, 55, 8, WC_STATIC, SS_TEXT |
+                DT_RIGHT | DT_TOP | WS_GROUP | WS_VISIBLE
+        CONTROL "ptlAngle", 264, 3, 25, 55, 8, WC_STATIC, SS_TEXT |
+                DT_RIGHT | DT_TOP | WS_GROUP | WS_VISIBLE
+        CONTROL "ptlShear", 265, 3, 15, 55, 8, WC_STATIC, SS_TEXT | DT_RIGHT |
+                DT_TOP | WS_GROUP | WS_VISIBLE
+        CONTROL "usDirection", 266, 3, 5, 75, 8, WC_STATIC, SS_TEXT | DT_RIGHT |
+                DT_TOP | WS_GROUP | WS_VISIBLE
+
+        CONTROL "0", CB_lColor, 87, 97, 35, 5, WC_ENTRYFIELD, ES_MARGIN |
+                WS_TABSTOP | WS_VISIBLE
+        CONTROL "0",  CB_lBackColor, 87, 87, 35, 5, WC_ENTRYFIELD, ES_MARGIN |
+                WS_TABSTOP | WS_VISIBLE
+        CONTROL "0", CB_usMixMode, 87, 77, 35, 5, WC_ENTRYFIELD, ES_MARGIN |
+                WS_TABSTOP | WS_VISIBLE
+        CONTROL "0", CB_usBackMixMode, 87, 67, 35, 5, WC_ENTRYFIELD, ES_MARGIN |
+                WS_TABSTOP | WS_VISIBLE
+        CONTROL "0", CB_usSet, 87, 56, 35, 8, WC_ENTRYFIELD,
+                WS_VISIBLE | ES_READONLY
+        CONTROL "0", CB_usPrecision, 87, 47, 35, 5, WC_ENTRYFIELD, ES_MARGIN |
+                WS_TABSTOP | WS_VISIBLE
+
+        CONTROL "0", CB_sizfxCell_X, 77, 37, 15, 5, WC_ENTRYFIELD, ES_MARGIN |
+                WS_TABSTOP | WS_VISIBLE
+        CONTROL "0", CB_sizfxCell_Y, 97, 37, 15, 5, WC_ENTRYFIELD, ES_MARGIN |
+                WS_TABSTOP | WS_VISIBLE
+
+        CONTROL "0", CB_ptlAngle_X, 77, 27, 15, 5, WC_ENTRYFIELD, ES_MARGIN |
+                WS_TABSTOP | WS_VISIBLE
+        CONTROL "0", CB_ptlAngle_Y, 97, 27, 15, 5, WC_ENTRYFIELD, ES_MARGIN |
+                WS_TABSTOP | WS_VISIBLE
+
+        CONTROL "0", CB_ptlShear_X, 77, 17, 15, 5, WC_ENTRYFIELD, ES_MARGIN |
+                WS_TABSTOP | WS_VISIBLE
+        CONTROL "0", CB_ptlShear_Y, 97, 17, 15, 5, WC_ENTRYFIELD, ES_MARGIN |
+                WS_TABSTOP | WS_VISIBLE
+
+        CONTROL "0", CB_usDirection, 87, 7, 35, 5, WC_ENTRYFIELD, ES_MARGIN |
+                WS_TABSTOP | WS_VISIBLE
+    END
+END
